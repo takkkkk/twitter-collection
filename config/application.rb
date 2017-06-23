@@ -13,5 +13,3 @@ module TwitterCollectionApp
     # -- all .rb files in that directory are automatically loaded.
   end
 end
-
-ENV.update YAML.load_file('config/settings.yml')[Rails.env] rescue {}

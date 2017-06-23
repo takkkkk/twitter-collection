@@ -2,6 +2,35 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def index
+
+    @post = Post.new
+
     require 'twitter'
-  end
+
+    client = Twitter::REST::Client.new do |config|
+        config.consumer_key        = ENV['CONSUMER_KEY'];
+        config.consumer_secret     = ENV['CONSUMER_SECRET'];
+        config.access_token        = ENV['ACCESS_TOKEN'];
+        config.access_token_secret = ENV['ACCESS_TOKEN_SECRET'];
+    end
+
+    #取得数
+    limit = 10
+
+    #検索するハッシュタグの
+    tag = "さ厳言"
+
+    client.search("#{tag}", lang: 'ja', result_type: 'recent', count: 1).take(limit).map do |tweet|
+      #投稿者名
+      @post[:name] = tweet.user.name
+
+      #投稿内容
+      @post[:content] = tweet.text
+
+      @post.save
+    end
+
+    @posts = Post.all
+
+    end
 end

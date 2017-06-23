@@ -21,4 +21,4 @@
 .byebug_history
 
 # Ignore Twitter API Key
-/config/settings.yml
+/.env 

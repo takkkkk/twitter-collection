@@ -20,17 +20,19 @@ class ApplicationController < ActionController::Base
     #検索するハッシュタグの
     tag = "さ厳言"
 
-    client.search("#{tag}", lang: 'ja', result_type: 'recent', count: 1).take(limit).map do |tweet|
+    client.search("#{tag}", lang: 'ja', result_type: 'recent', count: 1).take(limit).each do |tweet|
       #投稿者名
       @post[:name] = tweet.user.name
 
       #投稿内容
       @post[:content] = tweet.text
-
-      @post.save
     end
+    @post.save
 
     @posts = Post.all
+
+    render html:@posts
+
 
     end
 end

@@ -3,6 +3,12 @@ class PostsController < ApplicationController
 
   # GET /posts
   # GET /posts.json
+
+  # def index
+  #   @posts = Post.all
+  # end
+
+
   def index
     require 'twitter'
 
@@ -14,23 +20,44 @@ class PostsController < ApplicationController
     end
 
     #取得数
-    limit = 10
+    limit = 5
 
     #検索するハッシュタグの
-    tag = "さ厳言"
+    tag = "#超・獣神祭で欲しいキャラ"
 
-    @post = Post.new
+    if Post.last.nil? == false
+      recent_post = Post.first[:created_time]
+    end
 
-    client.search("#{tag}", lang: 'ja', result_type: 'recent', count: 1).take(limit).each do |tweet|
+    tweets = Array.new
+    client.search("#{tag}", lang: 'ja', result_type: 'recent', count: 1).take(limit).map do |tweet|
+      @post = Post.new
+
       #投稿者名
       @post[:name] = tweet.user.name
 
       #投稿内容
       @post[:content] = tweet.text
+
+      # 投稿日時
+      @post[:created_time] = tweet.created_at
+
+      tweets << @post
+    end
+
+    unless recent_post.nil? then
+      tweets.reverse.each do |i|
+        if recent_post < i[:created_time]
+          i.save
+        end
+      end
+    else
+      tweets.reverse.each do |i|
+        i.save
+      end
     end
 
     @posts = Post.all
-
   end
 
   # GET /posts/1

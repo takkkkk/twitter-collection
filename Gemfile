@@ -55,3 +55,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'twitter'
 gem 'dotenv-rails'
 gem 'pry'
+gem 'whenever', require: false

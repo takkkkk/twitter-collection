@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+  
   # GET /posts
   # GET /posts.json
 
@@ -23,7 +24,7 @@ class PostsController < ApplicationController
     limit = 5
 
     #検索するハッシュタグの
-    tag = "#超・獣神祭で欲しいキャラ"
+    tag = "#獣神祭で欲しいキャラ"
 
     if Post.last.nil? == false
       recent_post = Post.first[:created_time]

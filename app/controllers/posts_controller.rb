@@ -24,7 +24,7 @@ class PostsController < ApplicationController
     limit = 5
 
     #検索するハッシュタグの
-    tag = "#獣神祭で欲しいキャラ"
+    tag = "#獣神祭で欲しい"
 
     if Post.last.nil? == false
       recent_post = Post.first[:created_time]

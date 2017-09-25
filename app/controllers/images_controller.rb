@@ -8,35 +8,135 @@ class ImagesController < ApplicationController
     require 'twitter'
     require 'open-uri'
 
-    client = Twitter::REST::Client.new do |config|
-        config.consumer_key        = "FclB5az1e0DWZ34a9MckEGvGD";
-        config.consumer_secret     = "XNXRgFURS5iFh79uODnGGi7XPdawGPresfipVEKchHmomzHATj";
-        config.access_token        = "733237416-5GwKOseWBtzBykr8sosVDkfEHzusPSIlhvBlhOcf";
-        config.access_token_secret = "BNt00a1q1Kc8faBb4leHo8HRcl2vAukWxFF2YVr4LCVO1";
-    end
+    # client = Twitter::REST::Client.new do |config|
+    #     config.consumer_key        = "FclB5az1e0DWZ34a9MckEGvGD";
+    #     config.consumer_secret     = "XNXRgFURS5iFh79uODnGGi7XPdawGPresfipVEKchHmomzHATj";
+    #     config.access_token        = "733237416-5GwKOseWBtzBykr8sosVDkfEHzusPSIlhvBlhOcf";
+    #     config.access_token_secret = "BNt00a1q1Kc8faBb4leHo8HRcl2vAukWxFF2YVr4LCVO1";
+    # end
+    #
+    # tag = "#ねこ部 -rt"
+    # # -rtをつけることでリツイートを除外
+    #
+    # count = 0
+    # flag = false
+    #
+    # # limit = 15
+    #
+    # all = Array.new
+    # usr_posts = Array.new
+    # post = Hash.new
+    #
+    # usr_images = Array.new
+    # image = Hash.new
+    #
+    # entities = Array.new
+    #
+    # client.search("#{tag}", lang: 'ja', result_type: 'recent', include_entities: 1).each do |tweet|
+    #   flag2 = false
+    #   tweet.media.each do |media|
+    #     i = 0
+    #     x = media.media_url.to_s
+    #     if !(x.nil?) then
+    #       y = open(x).read
+    #
+    #       image = { url:x, data:y }
+    #       # images << open("#{@image[:image_url]}").read
+    #
+    #       flag2 = true
+    #     end
+    #   end
+    #
+    #   if flag2 then
+    #     post = { name:tweet.user.name, content:tweet.text }
+    #     post.merge!(image)
+    #     @image = Image.new
+    #     @image[:name] = post[:name]
+    #     @image[:content] = post[:content]
+    #     @image[:image_url] = post[:url]
+    #     @image[:data] = post[:data]
+    #
+    #     @image.save
+    #   end
+    # end
 
-    tag = "シャドウバース"
 
-    count = 0
-    flag = false
 
-    client.search("#{tag}", lang: 'ja', result_type: 'recent', include_entities: true).each do |tweet|
-      tweet.media.each do |media|
-        if count < 9 then
-          @image = Image.new
-          @image[:image_url] = media.media_url.to_s
-          @image[:data] = open("#{@image[:image_url]}").read
-          @image.save
-        else
-          flag = true
-          break
-        end
-        count += 1
-      end
-      break if flag
-    end
 
-    @images = Image.all
+
+            # usr_images.each do |i|
+            #   count = 0
+            #   @image = Image.new
+            #   i.each_value do |value|
+            #     case count
+            #     when 0 then
+            #       @image[:image_url] = value
+            #       count += 1
+            #     when 1 then
+            #       @image[:data] = value
+            #       @image.save
+            #     end
+            #   end
+            # end
+
+            # tweet.each do |i|
+            #   image = { :name => i.user.name, :cotent => i.text }
+            #
+            #   usr_images << image
+            # end
+
+
+            # post = { :name => tweet.user.name, :content => tweet.text }
+            # usr_posts << post
+
+
+
+            # usr_posts.zip(usr_images).each do |post, image|
+            #   post.merge(image)
+            #   all << post
+            # end
+
+            # all.each do |i|
+            #   count = 0
+            #   @image = Image.new
+            #   i.each_value do |t|
+            #     case count
+            #     when 0 then
+            #       @image[:name] = t
+            #       count += 1
+            #     when 1 then
+            #       @image[:content] = t
+            #       count += 1
+            #     when 2 then
+            #       @image[:url] = t
+            #       count += 1
+            #     when 3 then
+            #       @image[:data] = t
+            #       @image.save
+            #     end
+            #   end
+            # end
+
+
+        # client.search("#{tag}", lang: 'ja', result_type: 'recent', include_entities: 1).take(limit).each do |tweet|
+        #   tweet.media.each do |media|
+        #     if count < 100 then
+        #       @image = Image.new
+        #       @image[:image_url] = media.media_url.to_s
+        #       @image[:data] = open("#{@image[:image_url]}").read
+        #       @image.save
+        #     else
+        #       flag = true
+        #       break
+        #     end
+        #     count += 1
+        #   end
+        #   break if flag
+        # end
+
+
+    # @images = Image.all
+    @images = Image.limit(45)
     respond_to do |format|
      format.html # index.html.erb
      format.xml  { render :xml => @images }

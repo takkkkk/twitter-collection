@@ -19,10 +19,16 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :output, 'log/crontab.log'
 
-set :environment, :production
+require File.expand_path(File.dirname(__FILE__) + "/environment")
+rails_env = ENV['RAILS_ENV'] || :development
+set :environment, rails_env
+set :output, "#{Rails.root}/log/cron.log"
 
-every 1.hours do
-  command "echo 'hello, wehnever, world!'"
+# set :output, 'log/crontab.log'
+#
+# set :environment, :development
+
+every 5.minutes do
+  runner "bundle exec rails runner Sample.get_tweet"
 end

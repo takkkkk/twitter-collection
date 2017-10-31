@@ -1,14 +1,14 @@
-class Image < ApplicationRecord
+
+class Tasks::Batch
   require 'twitter'
   require 'open-uri'
 
-  paginates_per 12
-
-  def aaa
-    puts "hello, world!"
+  def self.execute
+    # 実行したいコードを書く
+    p "Hello world"
   end
 
-  def get_tweet
+  def self.get_tweet
     client = Twitter::REST::Client.new do |config|
         config.consumer_key        = "FclB5az1e0DWZ34a9MckEGvGD";
         config.consumer_secret     = "XNXRgFURS5iFh79uODnGGi7XPdawGPresfipVEKchHmomzHATj";

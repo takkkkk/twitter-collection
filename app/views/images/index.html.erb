@@ -2,55 +2,18 @@
 
 <h1>#ねこ部でつぶやいてモザイクアートを作ろう！</h1>
 
-    <div class="mosaic"><img src="assets/500_2.jpg"></div>
-
-<div class="large_post">
-  <div class="middle_post">
   <% @images.each do |image| %>
     <div class="post">
-      <div class="image">
         <%= image_tag(url_for(:action => 'get_image', :id => image.id), :size => '200x200') %>
-      </div>
 
-      <div class="name">
         <p class="user_name"> <%= image.name %> </p>
-      </div>
 
-      <div class="text">
         <p class="content"><%= image.content %><p>
-      </div>
     </div>
   <% end %>
-  </div>
-</div>
-
-<!-- <table>
-  <thead>
-    <tr>
-      <th>
-        Name
-      </th>
-      <th>
-        Content
-      </th>
-      <th>Image url</th>
-      <th>Data</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @images.each do |image| %>
-      <tr>
-        <td><%= image.name %></td>
-        <td><%= image.content %></td>
-        <td><%= image.image_url %></td>
-        <td><%= image_tag(url_for(:action => 'get_image', :id => image.id), :size => '50x50')%></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table> -->
 
 <br>
+
+<%= paginate @images, outer_window: 4 %>
 
 <!-- <%= link_to 'New Image', new_image_path %> -->

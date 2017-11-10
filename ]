@@ -1,6 +1,0 @@
-class Test
-  def self.hoge
-    logger = Logger.new('log/development.log')
-    logger.debug(puts "hoge")
-  end
-end

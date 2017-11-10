@@ -13,14 +13,14 @@ class Sample
         config.access_token_secret = ENV["ACCESS_TOKEN_SECRET"]
     end
 
-    tag = "#神戸電子専門学校 -rt"
+    tag = "#ねこ部 -rt"
 
     # 何ツイート取得するか
     limit = 100
 
     image = Hash.new
 
-    client.search("#{tag}", lang: 'ja', result_type: 'recent', include_entities: 1).take(limit).each do |tweet|
+    client.search("#{tag}", lang: 'ja', result_type: 'recent', include_entities: 1).each do |tweet|
       flag = false
       tweet.media.each do |media|
         i = 0
@@ -28,6 +28,7 @@ class Sample
         # 画像のありなしの判断
         if !(x.nil?) then
           y = open(x).read
+          z = media.
 
           image = { image_url:x, data:y }
 

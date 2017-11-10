@@ -65,3 +65,4 @@ gem 'dotenv-rails'
 gem 'pry'
 gem 'whenever', require: false
 gem 'kaminari'
+gem 'rmagick', :require => 'RMagcik'

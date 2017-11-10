@@ -8,12 +8,12 @@ class ImagesController < ApplicationController
     # require 'twitter'
     # require 'open-uri'
     #
-    client = Twitter::REST::Client.new do |config|
-        config.consumer_key        = "FclB5az1e0DWZ34a9MckEGvGD";
-        config.consumer_secret     = "XNXRgFURS5iFh79uODnGGi7XPdawGPresfipVEKchHmomzHATj";
-        config.access_token        = "733237416-5GwKOseWBtzBykr8sosVDkfEHzusPSIlhvBlhOcf";
-        config.access_token_secret = "BNt00a1q1Kc8faBb4leHo8HRcl2vAukWxFF2YVr4LCVO1";
-    end
+    # client = Twitter::REST::Client.new do |config|
+    #     config.consumer_key        = "FclB5az1e0DWZ34a9MckEGvGD";
+    #     config.consumer_secret     = "XNXRgFURS5iFh79uODnGGi7XPdawGPresfipVEKchHmomzHATj";
+    #     config.access_token        = "733237416-5GwKOseWBtzBykr8sosVDkfEHzusPSIlhvBlhOcf";
+    #     config.access_token_secret = "BNt00a1q1Kc8faBb4leHo8HRcl2vAukWxFF2YVr4LCVO1";
+    # end
     #
     # tag = "#ねこ部 -rt"
     # # -rtをつけることでリツイートを除外

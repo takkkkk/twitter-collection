@@ -28,7 +28,6 @@ class Sample
         # 画像のありなしの判断
         if !(x.nil?) then
           y = open(x).read
-          z = media.
 
           image = { image_url:x, data:y }
 

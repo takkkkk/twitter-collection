@@ -5,60 +5,60 @@ class ImagesController < ApplicationController
   # GET /images.json
   def index
 
-    # require 'twitter'
-    # require 'open-uri'
-    #
-    # client = Twitter::REST::Client.new do |config|
-    #     config.consumer_key        = "FclB5az1e0DWZ34a9MckEGvGD";
-    #     config.consumer_secret     = "XNXRgFURS5iFh79uODnGGi7XPdawGPresfipVEKchHmomzHATj";
-    #     config.access_token        = "733237416-5GwKOseWBtzBykr8sosVDkfEHzusPSIlhvBlhOcf";
-    #     config.access_token_secret = "BNt00a1q1Kc8faBb4leHo8HRcl2vAukWxFF2YVr4LCVO1";
-    # end
-    #
-    # tag = "#ねこ部 -rt"
-    # # -rtをつけることでリツイートを除外
-    #
-    # count = 0
-    # flag = false
-    #
-    # limit = 15
+    require 'twitter'
+    require 'open-uri'
 
-    # all = Array.new
-    # usr_posts = Array.new
-    # post = Hash.new
+    client = Twitter::REST::Client.new do |config|
+        config.consumer_key        = "FclB5az1e0DWZ34a9MckEGvGD";
+        config.consumer_secret     = "XNXRgFURS5iFh79uODnGGi7XPdawGPresfipVEKchHmomzHATj";
+        config.access_token        = "733237416-5GwKOseWBtzBykr8sosVDkfEHzusPSIlhvBlhOcf";
+        config.access_token_secret = "BNt00a1q1Kc8faBb4leHo8HRcl2vAukWxFF2YVr4LCVO1";
+    end
 
-    # usr_images = Array.new
-    # image = Hash.new
+    tag = "#ねこ部 -rt"
+    # -rtをつけることでリツイートを除外
+
+    count = 0
+    flag = false
+
+    limit = 15
     #
-    # # entities = Array.new
+    all = Array.new
+    usr_posts = Array.new
+    post = Hash.new
     #
-    # client.search("#{tag}", lang: 'ja', result_type: 'recent', include_entities: 1).each do |tweet|
-    #   flag2 = false
-    #   tweet.media.each do |media|
-    #     x = media.media_url.to_s
-    #     if !(x.nil?) then
-    #       y = open(x).read
-    #
-    #       image = { url:x, data:y }
-    #       # images << open("#{@image[:image_url]}").read
-    #
-    #       flag2 = true
-    #     end
-    #   end
-    #
-    #   if flag2 then
-    #     post = { name:tweet.user.name, content:tweet.text }
-    #     post.merge!(image)
-    #     @image = Image.new
-    #     @image[:name] = post[:name]
-    #     @image[:content] = post[:content]
-    #     @image[:image_url] = post[:url]
-    #     @image[:data] = post[:data]
-    #
-    #     @image.save
-    #   end
-    # end
-    #
+    usr_images = Array.new
+    image = Hash.new
+
+    # entities = Array.new
+
+    client.search("#{tag}", lang: 'ja', result_type: 'recent', include_entities: 1).each do |tweet|
+      flag2 = false
+      tweet.media.each do |media|
+        x = media.media_url.to_s
+        if !(x.nil?) then
+          y = open(x).read
+
+          image = { url:x, data:y }
+          # images << open("#{@image[:image_url]}").read
+
+          flag2 = true
+        end
+      end
+
+      if flag2 then
+        post = { name:tweet.user.name, content:tweet.text }
+        post.merge!(image)
+        @image = Image.new
+        @image[:name] = post[:name]
+        @image[:content] = post[:content]
+        @image[:image_url] = post[:url]
+        @image[:data] = post[:data]
+
+        @image.save
+      end
+    end
+
     #
     #
 
